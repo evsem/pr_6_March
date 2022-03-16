@@ -1,0 +1,9 @@
+.selectTeal {
+  min-width: 150px;
+  background-color: transparent;
+  border: 2px solid teal;
+  border-radius: 3px;
+  font-family: 'Montserrat';
+  font-size: 20px;
+  font-weight: 400;
+}
