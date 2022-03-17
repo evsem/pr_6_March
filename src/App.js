@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
+import Filter from './Components/Filter/Filter'
 import Form from './Components/Form/Form'
 import List from './Components/List/List'
+import { usePosts } from './Hooks/usePosts'
 import './Style/App.css'
 
 const App = () => {
@@ -9,6 +11,8 @@ const App = () => {
     { id: 2, title: 'Japan', body: 'Asia' },
     { id: 3, title: 'Mexico', body: 'America' },
   ])
+  let [filter, setFilter] = useState({ sort: '', query: '' })
+  let searchedAndSelectedPosts = usePosts(posts, filter.sort, filter.query)
 
   const addNewPost = (newPost) => {
     setPosts([newPost, ...posts])
@@ -19,9 +23,10 @@ const App = () => {
   return (
     <div className="App">
       <Form addPost_Func={addNewPost} />
+      <Filter filter={filter} setFilter={setFilter} />
 
-      {posts.length ? (
-        <List posts={posts} removePost={removePost} />
+      {searchedAndSelectedPosts.length ? (
+        <List posts={searchedAndSelectedPosts} removePost={removePost} />
       ) : (
         <h2 className="App_titleWarning">No posts</h2>
       )}
